@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- The difficulty determines the amount of work (computing time) required for generating a new block on the blockchain. The higher the difficulty, the longer the computing time to find a hash that meets a specific format, like a number of leading zeros. --></help>
+    <label><!-- Difficulty --></label>
+    <name>Difficulty__c</name>
+</CustomFieldTranslation>

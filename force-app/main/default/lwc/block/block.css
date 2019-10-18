@@ -1,0 +1,55 @@
+.block {
+  border: 3px solid #005583;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  min-width: 150px;
+  min-height: 150px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  resize: both;
+  overflow: auto;
+}
+
+.block-3d-effect {
+    box-shadow: 1px 1px 0px #005583,
+                2px 2px 0px #005583,
+                3px 3px 0px #005583,
+                4px 4px 0px #005583,
+                5px 5px 0px #005583,
+                6px 6px 0px #005583,
+                7px 7px 0px #005583;
+}
+
+.block-error {
+  background-color: rgb(255, 0, 0, 0.5);
+}
+
+.chain-part-1 {
+  height: 20px;
+  width: 5px;
+  background-color: #1a1b1e;
+  position:relative;
+  left: 50%;
+  margin-left:-2px;
+}
+
+.chain-part-2 {
+  border: 3px solid #1a1b1e;
+  width: 20px;
+  height: 30px;
+  border-radius: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.slds-form-element__label {
+  margin-bottom: 0rem;
+}

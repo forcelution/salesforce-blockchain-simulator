@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- The reward (e.g. number of crypto coins) a miner receives after generating a new block. This is the incentive for miners to provide computing time for mining a hash to generate a new block. --></help>
+    <label><!-- Reward --></label>
+    <name>Reward__c</name>
+</CustomFieldTranslation>

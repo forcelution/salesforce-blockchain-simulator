@@ -1,0 +1,20 @@
+<template>
+    <table>
+        <template for:each={steps} for:item="step">
+            <template if:true={step.show}>
+                <tr key={step.number}>
+                    <td style="width: 200px;">{step.description}</td>
+                    <td style="width: 80px;">
+                        <template if:false={step.completed}>
+                            <p class="spinner"><lightning-spinner alternative-text="Processing" size="small"></lightning-spinner></p>
+                        </template>
+                        <template if:true={step.completed}>
+                            <p><lightning-icon icon-name="utility:check" alternative-text="Completed" size="small"></lightning-icon></p>
+                        </template>
+                    </td>
+                    <td>{step.comments}</td>
+                </tr>
+            </template>
+        </template>
+    </table>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <template if:true={result}>
+        <lightning-datatable
+            key-field="blockName"
+            columns={columns}
+            data={result}
+            hide-checkbox-column="true">
+        </lightning-datatable>
+    </template>
+    <template if:false={result}>
+        <div class="spinner-holder">
+            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </div>
+    </template>
+</template>

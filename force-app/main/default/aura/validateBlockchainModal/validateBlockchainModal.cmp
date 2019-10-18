@@ -1,0 +1,9 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId">
+    
+    <aura:html tag="style">
+        .slds-modal__container {width: 70%; max-width: 955px;}
+    </aura:html>
+    
+    <c:validateBlockchain blockchainId="{!v.recordId}" />
+    
+</aura:component>

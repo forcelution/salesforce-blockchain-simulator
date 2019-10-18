@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Transfer</fullName>
+        <default>true</default>
+        <label>Transfer</label>
+    </customValue>
+    <customValue>
+        <fullName>Reward</fullName>
+        <default>false</default>
+        <label>Reward</label>
+    </customValue>
+    <masterLabel>Transaction Types</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

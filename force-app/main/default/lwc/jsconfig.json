@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/addBlock": [
+                "addBlock/addBlock.js"
+            ],
+            "c/block": [
+                "block/block.js"
+            ],
+            "c/blockchain": [
+                "blockchain/blockchain.js"
+            ],
+            "c/blockchainController": [
+                "blockchainController/blockchainController.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
+            ],
+            "c/validateBlockchain": [
+                "validateBlockchain/validateBlockchain.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+}
+
+tr {
+    height: 40px;
+}
+
+.spinner {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    padding-top: 10px;
+}

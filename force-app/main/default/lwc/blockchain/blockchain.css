@@ -1,0 +1,14 @@
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.body {
+    max-height: 1000px;
+    padding-bottom: 20px;
+    overflow-y: scroll;
+}
+
+.start {
+    margin-top: -5px;
+}
