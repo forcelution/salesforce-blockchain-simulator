@@ -1,13 +1,16 @@
 <template>
     <lightning-card title="Blockchain" icon-name="custom:custom57">
-        <lightning-button-icon icon-name="utility:refresh" variant="bare" alternative-text="Refresh" slot="actions" onclick={refreshData}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:refresh" variant="bare" alternative-text="Refresh" slot="actions" onclick={refresh}></lightning-button-icon>
         <hr>
         <div class="body">
-            <div class="start"></div>
-            <template if:true={blocks}>
+            <template if:true={isInitialized}>
+                <div class="start"></div>
                 <template for:each={blocks} for:item="block">
                     <c-block key={block.Id} block={block}></c-block>
                 </template>
+            </template>
+            <template if:false={isInitialized}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
             </template>
         </div>
     </lightning-card>

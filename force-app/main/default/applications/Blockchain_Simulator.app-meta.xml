@@ -6,10 +6,11 @@
         <logoVersion>1</logoVersion>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
+    <description>Simulate a blockchain and learn about core aspects such as executing transactions, and mining and validating blocks.</description>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <label>Blockchain</label>
+    <label>Blockchain Simulator</label>
     <navType>Standard</navType>
     <tabs>Blockchain__c</tabs>
     <tabs>Block__c</tabs>

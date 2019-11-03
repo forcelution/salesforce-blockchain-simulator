@@ -53,3 +53,7 @@
 .slds-form-element__label {
   margin-bottom: 0rem;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

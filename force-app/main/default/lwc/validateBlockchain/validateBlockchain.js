@@ -2,6 +2,7 @@ import { LightningElement, api, track, wire } from 'lwc';
 import validateBlockchain from '@salesforce/apex/BlockchainController.validateBlockchain';
 import { CurrentPageReference } from 'lightning/navigation';
 import { fireEvent } from 'c/pubsub';
+import { showToast } from 'c/toast';
 
 const columns = [
     { label: 'Block', fieldName: 'blockName', initialWidth: 75 },
@@ -24,6 +25,10 @@ export default class ValidateBlockchain extends LightningElement {
                 this.result = result;
                 this.error = undefined;
                 fireEvent(this.pageRef, 'refreshBlockchain', '');
+                if (result[result.length-1].isValid)
+                    showToast('success', 'The blockchain is valid!');
+                else
+                    showToast('error', 'It seems that the blockchain is tempered or hacked!');
             })
             .catch(error => {
                 this.result = undefined;

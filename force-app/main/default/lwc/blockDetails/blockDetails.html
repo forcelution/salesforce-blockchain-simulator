@@ -1,0 +1,41 @@
+<template>
+    <lightning-record-view-form record-id={blockId} object-api-name="Block__c">
+        
+        <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_x-small">
+            <lightning-formatted-text value="Block Header"></lightning-formatted-text>
+        </h3>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_3-of-4">
+                <lightning-output-field field-name="Previous_Hash__c"></lightning-output-field>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-output-field field-name="Timestamp__c"></lightning-output-field>
+            </div>
+        </div>
+        
+        <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_x-small">
+            <lightning-formatted-text value="Transactions"></lightning-formatted-text>
+        </h3>
+        <div class="slds-p-vertical_x-small">
+            <lightning-datatable
+                key-field="Id"
+                data={transactions}
+                columns={columns}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+
+        <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_x-small">
+            <lightning-formatted-text value="Final Hash"></lightning-formatted-text>
+        </h3>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_3-of-4">
+                <lightning-output-field field-name="Hash__c"></lightning-output-field>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-output-field field-name="Nonce__c"></lightning-output-field>
+            </div>
+        </div>
+
+    </lightning-record-view-form>
+</template>

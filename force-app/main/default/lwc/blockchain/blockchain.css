@@ -4,6 +4,7 @@ hr {
 }
 
 .body {
+    min-height: 200px;
     max-height: 1000px;
     padding-bottom: 20px;
     overflow-y: scroll;

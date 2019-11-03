@@ -2,8 +2,8 @@ public with sharing class BlockchainController {
 
     @AuraEnabled(cacheable=true)
     public static List<Block__c> getBlocks(Id blockchainId){
-        return [SELECT Id, Name, Timestamp__c, Previous_Hash__c, Hash__c, Nonce__c, Number_of_Transactions__c, Status__c,
-                (SELECT Id, From_Participant__c, To_Participant__c, Amount__c, Type__c, CreatedDate
+        return [SELECT Id, Name, Index__c, Timestamp__c, Previous_Hash__c, Hash__c, Nonce__c, Number_of_Transactions__c, Status__c,
+                (SELECT Id, From_Participant__c, From_Participant_Name__c, To_Participant__c, To_Participant_Name__c, Amount__c, Type__c, CreatedDate
                  FROM Transactions__r ORDER BY Id)
                 FROM Block__c WHERE Blockchain__c = :blockchainId ORDER BY Index__c Asc];
     }

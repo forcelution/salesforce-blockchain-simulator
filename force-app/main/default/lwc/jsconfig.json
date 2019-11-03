@@ -15,11 +15,20 @@
             "c/blockchainController": [
                 "blockchainController/blockchainController.js"
             ],
+            "c/modal": [
+                "modal/modal.js"
+            ],
             "c/pubsub": [
                 "pubsub/pubsub.js"
             ],
             "c/validateBlockchain": [
                 "validateBlockchain/validateBlockchain.js"
+            ],
+            "c/toast": [
+                "toast/toast.js"
+            ],
+            "c/blockDetails": [
+                "blockDetails/blockDetails.js"
             ]
         }
     },

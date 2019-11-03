@@ -1,45 +1,70 @@
 <template>
+
     <div class="chain-part-1 slds-m-top_xx-small"></div>
     <div class="chain-part-2"></div>
     <div class="chain-part-1"></div>
     <div class="block block-3d-effect slds-p-around_small">
-        <div class="slds-grid" style="height: 32px;">
-            <div class="slds-col slds-size_1-of-8"></div>
-            <div class="slds-col slds-size_6-of-8">
-                <div class="text-center slds-text-title_caps slds-truncate">{block.Name}</div>
+        <div class="cursor-pointer" onclick={handleShowModal}>
+            <div class="slds-grid" style="height: 32px;">
+                <div class="slds-col slds-size_1-of-8"></div>
+                <div class="slds-col slds-size_6-of-8">
+                    <div class="text-center slds-text-title_caps slds-truncate">{block.Name}</div>
+                </div>
+                <div class="slds-col slds-size_1-of-8">
+                    <template if:true={isValid}>
+                        <lightning-icon icon-name="action:approval" alternative-text="Valid" size="x-small"></lightning-icon>
+                    </template>
+                    <template if:true={isInvalid}>
+                        <lightning-icon icon-name="action:close" alternative-text="Invalid" size="x-small"></lightning-icon>
+                    </template>
+                </div>
             </div>
-            <div class="slds-col slds-size_1-of-8">
-                <template if:true={isValid}>
-                    <lightning-icon icon-name="action:approval" alternative-text="Valid" size="x-small"></lightning-icon>
-                </template>
-                <template if:true={isInvalid}>
-                    <lightning-icon icon-name="action:close" alternative-text="Invalid" size="x-small"></lightning-icon>
-                </template>
+            <div class="slds-form-element" style="margin-top: -10px;">
+                <label class="slds-form-element__label slds-truncate">Timestamp</label>
+                <div class="slds-form-element__control slds-truncate">
+                    <lightning-formatted-date-time value={block.Timestamp__c} year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                </div>
             </div>
-        </div>
-        <div class="slds-form-element" style="margin-top: -10px;">
-            <label class="slds-form-element__label slds-truncate">Timestamp</label>
-            <div class="slds-form-element__control slds-truncate">
-                <lightning-formatted-date-time value={block.Timestamp__c} year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
-            </div>
-        </div>
-        <template if:true={block.Previous_Hash__c}>
+            <template if:true={block.Previous_Hash__c}>
+                <div class="slds-form-element slds-m-top_xx-small">
+                    <label class="slds-form-element__label slds-truncate">Previous Hash</label>
+                    <div class="slds-form-element__control slds-truncate" title={block.Previous_Hash__c}>
+                        <template if:true={isEven}>
+                            <p style="color:#005fb2;">{block.Previous_Hash__c}</p>
+                        </template>
+                        <template if:false={isEven}>
+                            <p style="color:#04844b;">{block.Previous_Hash__c}</p>
+                        </template>
+                    </div>
+                </div>
+            </template>
             <div class="slds-form-element slds-m-top_xx-small">
-                <label class="slds-form-element__label slds-truncate">Previous Hash</label>
-                <div class="slds-form-element__control slds-truncate" title={block.Previous_Hash__c}>{block.Previous_Hash__c}</div>
+                <label class="slds-form-element__label slds-truncate">Hash</label>
+                <div class="slds-form-element__control slds-truncate" title={block.Hash__c}>
+                    <template if:false={isEven}>
+                        <p style="color:#005fb2;">{block.Hash__c}</p>
+                    </template>
+                    <template if:true={isEven}>
+                        <p style="color:#04844b;">{block.Hash__c}</p>
+                    </template>
+                </div>
             </div>
-        </template>
-        <div class="slds-form-element slds-m-top_xx-small">
-            <label class="slds-form-element__label slds-truncate">Hash</label>
-            <div class="slds-form-element__control slds-truncate" title={block.Hash__c}>{block.Hash__c}</div>
-        </div>
-        <div class="slds-form-element slds-m-top_xx-small">
-            <label class="slds-form-element__label slds-truncate">Nonce</label>
-            <div class="slds-form-element__control slds-truncate" title={block.Nonce__c}>{block.Nonce__c}</div>
-        </div>
-        <div class="slds-form-element slds-m-top_xx-small">
-            <label class="slds-form-element__label slds-truncate">Number of Transactions</label>
-            <div class="slds-form-element__control slds-truncate" title={block.Number_of_Transactions__c}>{block.Number_of_Transactions__c}</div>
+            <div class="slds-form-element slds-m-top_xx-small">
+                <label class="slds-form-element__label slds-truncate">Nonce</label>
+                <div class="slds-form-element__control slds-truncate" title={block.Nonce__c}>{block.Nonce__c}</div>
+            </div>
+            <div class="slds-form-element slds-m-top_xx-small">
+                <label class="slds-form-element__label slds-truncate">Number of Transactions</label>
+                <div class="slds-form-element__control slds-truncate" title={block.Number_of_Transactions__c}>{block.Number_of_Transactions__c}</div>
+            </div>
         </div>
     </div>
+
+    <c-modal header={block.Name}>
+        <c-block-details block-id={block.Id} transactions={block.Transactions__r}></c-block-details>
+        <div slot="footer">
+            <lightning-button label="Close" variant="brand" onclick={handleCloseModal}></lightning-button>
+        </div>
+    </c-modal>
+
 </template>

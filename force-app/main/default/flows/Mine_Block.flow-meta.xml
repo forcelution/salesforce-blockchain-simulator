@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <name>Initialized</name>
+        <label>Initialized</label>
+        <locationX>320</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>Not_yet_initialized</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE</defaultConnectorLabel>
+        <rules>
+            <name>Initialized_True</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Blockchain.Number_of_Blocks__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Select_Miner</targetReference>
+            </connector>
+            <label>TRUE</label>
+        </rules>
+    </decisions>
     <interviewLabel>Mine Block {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Mine Block</label>
     <processMetadataValues>
@@ -15,10 +40,32 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Blockchain</name>
+        <label>Get Blockchain</label>
+        <locationX>176</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Initialized</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Blockchain__c</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Number_of_Blocks__c</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>Mine_Block</name>
         <label>Mine Block</label>
-        <locationX>331</locationX>
+        <locationX>688</locationX>
         <locationY>50</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
@@ -46,9 +93,25 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>Not_yet_initialized</name>
+        <label>Not yet initialized</label>
+        <locationX>328</locationX>
+        <locationY>241</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>blockchainNotYetInitialized</name>
+            <fieldText>&lt;p&gt;Blockchain not yet initialized.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>Select_Miner</name>
         <label>Select Miner</label>
-        <locationX>188</locationX>
+        <locationX>536</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -99,7 +162,7 @@
         <locationX>50</locationX>
         <locationY>50</locationY>
         <connector>
-            <targetReference>Select_Miner</targetReference>
+            <targetReference>Get_Blockchain</targetReference>
         </connector>
     </start>
     <status>Active</status>

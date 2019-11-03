@@ -1,13 +1,14 @@
 {
   "orgName": "Blockchain Essentials",
   "edition": "Developer",
-  "release": "Preview",
   "language": "en_US",
   "features": [],
   "settings": {
-    "orgPreferenceSettings": {
-      "s1DesktopEnabled": true,
-      "s1EncryptedStoragePref2": false
+    "lightningExperienceSettings": {
+        "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+        "enableS1EncryptedStoragePref2": false
     }
   }
 }
