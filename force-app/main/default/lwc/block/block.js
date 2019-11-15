@@ -16,12 +16,14 @@ export default class Block extends LightningElement {
         return this.block.Index__c % 2;
     }
 
-    handleShowModal() {
+    handleShowBlockDetails() {
         const modal = this.template.querySelector('c-modal');
         modal.show();
+        const blockDetails = this.template.querySelector("c-block-details");
+        blockDetails.simulateHashMining();
     }
 
-    handleCloseModal() {
+    handleCloseBlockDetails() {
         const modal = this.template.querySelector('c-modal');
         modal.hide();
     }

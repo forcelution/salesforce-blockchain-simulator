@@ -12,12 +12,12 @@ public with sharing class BlockchainController {
     public static void createGenesisBlock(Id blockchainId){
         Blockchain__c blockchain = getBlockchain(blockchainId);
         Block genesisBlock = new Block();
-        genesisBlock.mineHash(blockchain.Difficulty__c.intValue());
+        genesisBlock.mineHash(Integer.valueOf(blockchain.Difficulty__c));
         genesisBlock.addToBlockchain(blockchainId);
     }
 
     @AuraEnabled
-    public static Block__c addBlock(Id blockchainId, Id minerId){
+    public static BlockWithTransactions addBlock(Id blockchainId, Id minerId){
         Blockchain__c blockchain = getBlockchain(blockchainId);
         Block__c previousBlock = blockchain.Blocks__r[0];
         List<Transaction__c> pendingTransactions = blockchain.Transactions__r;
@@ -27,11 +27,11 @@ public with sharing class BlockchainController {
         block.previousHash = previousBlock.Hash__c;
         block.setTransactionData(pendingTransactions);
         
-        block.mineHash(blockchain.Difficulty__c.intValue());
+        block.mineHash(Integer.valueOf(blockchain.Difficulty__c));
         Block__c addedBlock = block.addToBlockchain(blockchainId);
         commitTransactions(pendingTransactions, addedBlock.Id);
         rewardMiner(minerId, blockchain.Reward__c, blockchainId);
-        return addedBlock;
+        return new BlockWithTransactions(addedBlock, pendingTransactions);
     }
 
     @AuraEnabled
@@ -60,7 +60,7 @@ public with sharing class BlockchainController {
     private static Blockchain__c getBlockchain(Id blockchainId){
         return [SELECT Id, Difficulty__c, Reward__c,
                 (SELECT Index__c, Hash__c FROM Blocks__r ORDER BY Index__c Desc LIMIT 1),
-                (SELECT Id, From_Participant__c, To_Participant__c, Amount__c, Type__c, CreatedDate
+                (SELECT Id, From_Participant__c, From_Participant_Name__c, To_Participant__c, To_Participant_Name__c, Amount__c, Type__c, CreatedDate
                  FROM Transactions__r WHERE Status__c = 'Pending' ORDER BY Id)
                 FROM Blockchain__c WHERE Id = :blockchainId];
     }
@@ -109,6 +109,16 @@ public with sharing class BlockchainController {
             participant.Total_Amount_Received__c += participantsAmounts.get(participant.Id)[1];
         }
         Update participants;
+    }
+
+    public class BlockWithTransactions {
+        @AuraEnabled public Block__c block { get; private set; }
+        @AuraEnabled public List<Transaction__c> transactions { get; private set; }
+
+        public BlockWithTransactions(Block__c block, List<Transaction__c> transactions){
+            this.block = block;
+            this.transactions = transactions;
+        }
     }
 
     public class BlockValidationResult {

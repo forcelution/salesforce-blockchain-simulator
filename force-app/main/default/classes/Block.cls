@@ -48,21 +48,25 @@ public inherited sharing class Block {
     public void setTransactionData(List<Transaction__c> transactions){
         List<Trans> transactionData = new List<Trans>();
         for (Transaction__c trans : transactions){
-            transactionData.add(new Trans(trans.Amount__c, trans.From_Participant__c, trans.To_Participant__c));
+            transactionData.add(new Trans(trans.From_Participant__c, trans.To_Participant__c, trans.Amount__c, trans.Type__c, trans.CreatedDate));
         }
         data = JSON.serialize(transactionData);
         numberOfTransactions = transactions.size();
     }
 
     private class Trans {
-        String amount;
         String senderId;
         String receiverId;
+        String amount;
+        String type;
+        String createdDate;
 
-        public Trans(Decimal amount, Id senderId, Id receiverId){
-            this.amount = amount.format();
+        public Trans(Id senderId, Id receiverId, Decimal amount, String type, Datetime createdDate){
             this.senderId = senderId;
             this.receiverId = receiverId;
+            this.amount = amount.format();
+            this.type = type;
+            this.createdDate = String.valueOf(createdDate);
         }
     }
     

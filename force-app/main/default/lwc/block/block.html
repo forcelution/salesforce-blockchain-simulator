@@ -4,7 +4,7 @@
     <div class="chain-part-2"></div>
     <div class="chain-part-1"></div>
     <div class="block block-3d-effect slds-p-around_small">
-        <div class="cursor-pointer" onclick={handleShowModal}>
+        <div class="cursor-pointer" onclick={handleShowBlockDetails}>
             <div class="slds-grid" style="height: 32px;">
                 <div class="slds-col slds-size_1-of-8"></div>
                 <div class="slds-col slds-size_6-of-8">
@@ -61,9 +61,9 @@
     </div>
 
     <c-modal header={block.Name}>
-        <c-block-details block-id={block.Id} transactions={block.Transactions__r}></c-block-details>
+        <c-block-details block={block}></c-block-details>
         <div slot="footer">
-            <lightning-button label="Close" variant="brand" onclick={handleCloseModal}></lightning-button>
+            <lightning-button label="Close" variant="brand" onclick={handleCloseBlockDetails}></lightning-button>
         </div>
     </c-modal>
 

@@ -1,15 +1,19 @@
 <template>
-    <lightning-record-view-form record-id={blockId} object-api-name="Block__c">
-        
+    <template if:true={block}>
+
         <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_x-small">
             <lightning-formatted-text value="Block Header"></lightning-formatted-text>
         </h3>
-        <div class="slds-grid">
-            <div class="slds-col slds-size_3-of-4">
-                <lightning-output-field field-name="Previous_Hash__c"></lightning-output-field>
+        <div class="slds-grid slds-p-around_xx-small slds-m-bottom_xx-small">
+            <div class="slds-col slds-size_3-of-4 slds-form-element">
+                <label class="slds-form-element__label">Previous Hash</label>
+                <div class="slds-form-element__control">{block.Previous_Hash__c}</div>
             </div>
-            <div class="slds-col slds-size_1-of-4">
-                <lightning-output-field field-name="Timestamp__c"></lightning-output-field>
+            <div class="slds-col slds-size_1-of-4 slds-form-element">
+                <label class="slds-form-element__label">Timestamp</label>
+                <div class="slds-form-element__control">
+                    <lightning-formatted-date-time value={block.Timestamp__c} year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                </div>
             </div>
         </div>
         
@@ -17,25 +21,32 @@
             <lightning-formatted-text value="Transactions"></lightning-formatted-text>
         </h3>
         <div class="slds-p-vertical_x-small">
-            <lightning-datatable
-                key-field="Id"
-                data={transactions}
-                columns={columns}
-                hide-checkbox-column="true">
-            </lightning-datatable>
+            <template if:true={getTransactions}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={getTransactions}
+                    columns={transactionColumns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:false={getTransactions}>
+                <div class="slds-p-horizontal_x-small">-</div>
+            </template>
         </div>
 
         <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_x-small">
             <lightning-formatted-text value="Final Hash"></lightning-formatted-text>
         </h3>
-        <div class="slds-grid">
-            <div class="slds-col slds-size_3-of-4">
-                <lightning-output-field field-name="Hash__c"></lightning-output-field>
+        <div class="slds-grid slds-p-around_xx-small">
+            <div class="slds-col slds-size_3-of-4 slds-form-element">
+                <label class="slds-form-element__label">Hash</label>
+                <div class="slds-form-element__control">{hash}</div>
             </div>
-            <div class="slds-col slds-size_1-of-4">
-                <lightning-output-field field-name="Nonce__c"></lightning-output-field>
+            <div class="slds-col slds-size_1-of-4 slds-form-element">
+                <label class="slds-form-element__label">Nonce</label>
+                <div class="slds-form-element__control">{nonce}</div>
             </div>
         </div>
 
-    </lightning-record-view-form>
+    </template>
 </template>

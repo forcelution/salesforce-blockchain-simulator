@@ -2,6 +2,7 @@ import { LightningElement, api, track, wire } from 'lwc';
 import addBlock from '@salesforce/apex/BlockchainController.addBlock';
 import { CurrentPageReference } from 'lightning/navigation';
 import { fireEvent } from 'c/pubsub';
+import { showToast } from 'c/toast';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import MINER_NAME from '@salesforce/schema/Participant__c.Name';
 import BLOCKCHAIN_NAME from '@salesforce/schema/Blockchain__c.Name';
@@ -11,17 +12,18 @@ export default class AddBlock extends LightningElement {
     @api blockchainId;
     @api minerId;
     @track block;
+    @track transactions;
     @track error;
 
     @wire(CurrentPageReference) pageRef;
 
     @track steps = [
-        { number: 0, description: 'Validate transactions' },
-        { number: 1, description: 'Construct block' },
-        { number: 2, description: 'Mine hash' },
-        { number: 3, description: 'Add block to blockchain' },
-        { number: 4, description: 'Create reward transaction' },
-        { number: 5, description: 'Distribute blockchain' }
+        { number: 0, description: 'Initializing new block' },
+        { number: 1, description: 'Validating transactions' },
+        { number: 2, description: 'Mining hash' },
+        { number: 3, description: 'Adding block to blockchain' },
+        { number: 4, description: 'Creating reward transaction' },
+        { number: 5, description: 'Distributing blockchain' }
     ];
 
     @wire(getRecord, { recordId: '$minerId', fields: [MINER_NAME] })
@@ -51,16 +53,19 @@ export default class AddBlock extends LightningElement {
         this.initSteps();
         addBlock({ blockchainId: this.blockchainId, minerId: this.minerId })
             .then(result => {
-                this.block = result;
+                this.block = result.block;
+                this.transactions = result.transactions;
                 this.error = undefined;
             })
-            .then(() => this.processStep(0, 0, this.block.Number_of_Transactions__c + ' valid transaction(s)'))
-            .then(() => this.processStep(1, 1000, 'Previous hash: ' + this.block.Previous_Hash__c))
-            .then(() => this.processStep(2, 3000, 'Hash: ' + this.block.Hash__c))
-            .then(() => this.processStep(3, 1000, 'Timestamp: ' + this.block.Timestamp__c))
+            .then(() => this.processStep(0, 0, 'Previous hash: ' + this.block.Previous_Hash__c))
+            .then(() => this.processStep(1, 1000, this.block.Number_of_Transactions__c + ' valid transaction(s)'))
+            .then(() => this.template.querySelector("c-block-details").simulateHashMining())
+            .then(() => this.processStep(2, this.block.Nonce__c * 10, 'Hash: ' + this.block.Hash__c))
+            .then(() => this.processStep(3, 1000, ''))
             .then(() => fireEvent(this.pageRef, 'refreshBlockchain', ''))
             .then(() => this.processStep(4, 1000, this.minerName + ' rewarded with ' + this.reward + ' ' + this.rewardUnitName))
             //.then(this.steps[5].show = true)
+            .then(() => showToast('success', 'Process completed. New block successfully added to blockchain!'))
             .catch(error => {
                 this.block = undefined;
                 this.error = error;
@@ -80,13 +85,12 @@ export default class AddBlock extends LightningElement {
         this.steps[number].show = true;
         return new Promise(resolve => {
             // eslint-disable-next-line @lwc/lwc/no-async-operation
-            setTimeout(
-                () => {
-                    this.steps[number].completed = true;
-                    this.steps[number].comments = comments;
-                    resolve();
-                },
-                processingTime);
+            setTimeout( () => {
+                this.steps[number].completed = true;
+                this.steps[number].comments = comments;
+                resolve();
+            },
+            processingTime);
         })
     }
 
