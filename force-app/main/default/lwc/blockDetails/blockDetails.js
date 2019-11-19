@@ -1,10 +1,10 @@
 import { LightningElement, api, track } from 'lwc';
 
 const transactionColumns = [
-    { label: 'Type', fieldName: 'Type__c', initialWidth: 90 },
-    { label: 'From', fieldName: 'From_Participant_Name__c' },
-    { label: 'To', fieldName: 'To_Participant_Name__c' },
-    { label: 'Amount', fieldName: 'Amount__c', type: 'number', initialWidth: 90 },
+    { label: 'Type', fieldName: 'blckchn__Type__c', initialWidth: 90 },
+    { label: 'From', fieldName: 'blckchn__From_Participant_Name__c' },
+    { label: 'To', fieldName: 'blckchn__To_Participant_Name__c' },
+    { label: 'Amount', fieldName: 'blckchn__Amount__c', type: 'number', initialWidth: 90 },
     { label: 'Date', fieldName: 'CreatedDate', type: 'date', initialWidth: 140, typeAttributes: {
         year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }
     }
@@ -18,7 +18,7 @@ export default class blockDetails extends LightningElement {
     @track transactionColumns = transactionColumns;
 
     get getTransactions() {
-        return this.transactions.length > 0 ? this.transactions : this.block.Transactions__r;
+        return this.transactions.length > 0 ? this.transactions : this.block.blckchn__Transactions__r;
     }
 
     @api simulateHashMining() {
@@ -27,9 +27,9 @@ export default class blockDetails extends LightningElement {
         let i = setInterval(() => {
             this.nonce++;
             this.hash = this.generateRandomHash();
-            if (this.nonce === this.block.Nonce__c){
+            if (this.nonce === this.block.blckchn__Nonce__c){
                 clearInterval(i);
-                this.hash = this.block.Hash__c;
+                this.hash = this.block.blckchn__Hash__c;
             }
         }, 10);
     }

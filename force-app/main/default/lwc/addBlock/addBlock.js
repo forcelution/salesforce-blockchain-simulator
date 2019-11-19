@@ -57,10 +57,10 @@ export default class AddBlock extends LightningElement {
                 this.transactions = result.transactions;
                 this.error = undefined;
             })
-            .then(() => this.processStep(0, 0, 'Previous hash: ' + this.block.Previous_Hash__c))
-            .then(() => this.processStep(1, 1000, this.block.Number_of_Transactions__c + ' valid transaction(s)'))
+            .then(() => this.processStep(0, 0, 'Previous hash: ' + this.block.blckchn__Previous_Hash__c))
+            .then(() => this.processStep(1, 1000, this.block.blckchn__Number_of_Transactions__c + ' valid transaction(s)'))
             .then(() => this.template.querySelector("c-block-details").simulateHashMining())
-            .then(() => this.processStep(2, this.block.Nonce__c * 10, 'Hash: ' + this.block.Hash__c))
+            .then(() => this.processStep(2, this.block.blckchn__Nonce__c * 10, 'Hash: ' + this.block.blckchn__Hash__c))
             .then(() => this.processStep(3, 1000, ''))
             .then(() => fireEvent(this.pageRef, 'refreshBlockchain', ''))
             .then(() => this.processStep(4, 1000, this.minerName + ' rewarded with ' + this.reward + ' ' + this.rewardUnitName))

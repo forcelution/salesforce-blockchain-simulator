@@ -13,7 +13,7 @@
             <name>Initialized_True</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Blockchain.Number_of_Blocks__c</leftValueReference>
+                <leftValueReference>Get_Blockchain.blckchn__Number_of_Blocks__c</leftValueReference>
                 <operator>GreaterThan</operator>
                 <rightValue>
                     <numberValue>0.0</numberValue>
@@ -57,9 +57,9 @@
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Blockchain__c</object>
+        <object>blckchn__Blockchain__c</object>
         <queriedFields>Id</queriedFields>
-        <queriedFields>Number_of_Blocks__c</queriedFields>
+        <queriedFields>blckchn__Number_of_Blocks__c</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
@@ -131,7 +131,7 @@
             <inputParameters>
                 <name>fieldApiName</name>
                 <value>
-                    <stringValue>Miner__c</stringValue>
+                    <stringValue>blckchn__Miner__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -143,7 +143,7 @@
             <inputParameters>
                 <name>objectApiName</name>
                 <value>
-                    <stringValue>Blockchain__c</stringValue>
+                    <stringValue>blckchn__Blockchain__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>

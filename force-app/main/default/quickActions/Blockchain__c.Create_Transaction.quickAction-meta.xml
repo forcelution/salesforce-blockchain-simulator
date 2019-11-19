@@ -3,7 +3,7 @@
     <description>Create a new transaction.</description>
     <fieldOverrides>
         <field>Blockchain__c</field>
-        <formula>Blockchain__c.Id</formula>
+        <formula>Blockchain__r.Id</formula>
     </fieldOverrides>
     <fieldOverrides>
         <field>Status__c</field>

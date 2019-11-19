@@ -1,11 +1,20 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true,
+            "package": "Blockchain Simulator",
+            "versionName": "Version 1.0",
+            "versionNumber": "1.0.0.NEXT"
+        }
+    ],
+    "namespace": "blckchn",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "47.0",
+    "packageAliases": {
+        "Blockchain Simulator": "0Ho1r000000TN6oCAG",
+        "Blockchain Simulator@1.0.0-1": "04t1r000001ebiKAAQ",
+        "Blockchain Simulator@1.0.0-2": "04t1r000001ebiPAAQ",
+        "Blockchain Simulator@1.0.0-3": "04t1r000001ebiyAAA"
     }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "47.0"
 }

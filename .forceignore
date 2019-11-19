@@ -13,3 +13,6 @@ package.xml
 
 # User profiles
 force-app/main/default/profiles
+
+# AppSwitcher
+force-app/main/default/appMenus

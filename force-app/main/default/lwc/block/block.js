@@ -5,15 +5,15 @@ export default class Block extends LightningElement {
     @api block;
 
     get isValid() {
-        return this.block.Status__c === 'Valid';
+        return this.block.blckchn__Status__c === 'Valid';
     }
 
     get isInvalid() {
-        return this.block.Status__c === 'Invalid';
+        return this.block.blckchn__Status__c === 'Invalid';
     }
 
     get isEven() {
-        return this.block.Index__c % 2;
+        return this.block.blckchn__Index__c % 2;
     }
 
     handleShowBlockDetails() {
