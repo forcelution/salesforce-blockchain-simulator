@@ -10,7 +10,7 @@
     ],
     "namespace": "blckchn",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "47.0",
+    "sourceApiVersion": "48.0",
     "packageAliases": {
         "Blockchain Simulator": "0Ho1r000000TN6oCAG",
         "Blockchain Simulator@1.0.0-1": "04t1r000001ebiKAAQ",

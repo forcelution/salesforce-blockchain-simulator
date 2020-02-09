@@ -2,6 +2,7 @@
   "orgName": "Blockchain Simulator",
   "edition": "Developer",
   "language": "en_US",
+  "release": "preview",
   "features": [],
   "settings": {
     "lightningExperienceSettings": {
